@@ -1,0 +1,96 @@
+Exemplo de uso de algoritmos indutores de árvore de decisão
+===========================================================
+
+Este relatório exemplifica o uso dos pacotes **party** e **RWeka** em problemas de classificação.
+
+As referências utilizadas para a construção deste relatório foram: [http://cran.r-project.org/web/packages/RWeka/RWeka.pdf](http://cran.r-project.org/web/packages/RWeka/RWeka.pdf), [http://cran.r-project.org/doc/contrib/Zhao_R_and_data_mining.pdf](http://cran.r-project.org/doc/contrib/Zhao_R_and_data_mining.pdf) e [http://cran.r-project.org/web/packages/party/party.pdf](http://cran.r-project.org/web/packages/party/party.pdf).
+
+Acessando o dataset e criando os conjuntos de treinamento (70% das observações) e testes (30% das observações):
+
+````{r}
+set.seed(1234)
+data(iris)
+ind <- sample(2, nrow(iris), replace=TRUE, prob=c(0.7, 0.3))
+trainData <- iris[ind==1,]
+testData <- iris[ind==2,]
+````
+
+Faz a carga da biblioteca **party** e constrói a árvore de decisão usando o _ctree_:
+
+````{r, message=FALSE}
+library(party)
+myFormula <- Species ~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width
+iris_ctree <- ctree(myFormula, data=trainData)
+````
+
+Constrói a matriz de confusão usando o conjunto de treinamento:
+
+````{r}
+table(predict(iris_ctree), trainData$Species)
+````
+
+Visualizando a árvore de decisão gerada:
+
+````{r}
+print(iris_ctree)
+plot(iris_ctree)
+plot(iris_ctree, type="simple")
+````
+
+Gerando a matriz de confusão usando o conjunto de treinamento:
+
+````{r}
+testPred <- predict(iris_ctree, newdata = testData)
+table(testPred, testData$Species)
+````
+
+
+Fazendo _cross-validation_
+=========================================================
+
+A biblioteca _ipred_ possui funções que são específicas para a etapa de _cross-validation_.
+
+````{r, message=FALSE}
+library(ipred)
+````
+
+Executando um _10-fold cross-validation_:
+
+````{r}
+set.seed(1234)
+error <- numeric(10)
+for(i in 1:10) error[i] <- errorest(Species ~ ., data= iris, model=ctree)$error
+error
+summary(error)
+````
+
+Uso do algoritmo J48
+=========================================================
+
+Importando a biblioteca e criando o modelo:
+
+````{r}
+library(RWeka)
+iris_j48 <- J48(myFormula, data=trainData)
+````
+
+Obtendo a matriz de confusão:
+
+````{r}
+table(predict(iris_j48), trainData$Species)
+pred <- predict(iris_j48)
+````
+
+Imprindo a árvore gerada:
+
+````{r}
+print(iris_j48)
+plot(iris_j48)
+````
+
+Validando o modelo no conjunto de treinamento:
+
+````{r}
+testPred <- predict(iris_j48, newdata = testData)
+table(testPred, testData$Species)
+````

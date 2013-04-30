@@ -1,0 +1,87 @@
+Exemplo de uso do algoritmo random forest
+=============================================
+
+As principais referências para a produção deste exemplo foram [http://cran.r-project.org/doc/contrib/Zhao_R_and_data_mining.pdf](http://cran.r-project.org/doc/contrib/Zhao_R_and_data_mining.pdf), [http://cran.r-project.org/web/packages/randomForest/randomForest.pdf] (http://cran.r-project.org/web/packages/randomForest/randomForest.pdf) e [ftp://131.252.97.79/Transfer/temp_treg/WFRE_Articles/Liaw_02_Classification%20and%20regression%20by%20randomForest.pdf](ftp://131.252.97.79/Transfer/temp_treg/WFRE_Articles/Liaw_02_Classification%20and%20regression%20by%20randomForest.pdf)
+
+Carga da biblioteca e do conjunto de dados utilizados no exemplo:
+
+````{r, message=FALSE}
+library(randomForest)
+data(iris)
+````
+
+````{r}
+head(iris)
+````
+
+Etapa de treinamento:
+
+````{r}
+forestIris <- randomForest(Species ~ Petal.Width + Petal.Length, data=iris, prox=TRUE)
+forestIris
+````
+
+Recuperando uma das árvores geradas:
+
+````{r}
+getTree(forestIris, k=2)
+````
+
+Gerando uma matriz de confusão:
+
+````{r}
+table(predict(forestIris),iris$Species)
+prop.table(table(predict(forestIris),iris$Species))
+````
+
+Identificação dos centros das classes:
+
+````{r}
+iris.p <- classCenter(iris[,c(3,4)], iris$Species, forestIris$prox)
+plot(iris[,3], iris[,4], pch=21, xlab=names(iris)[3], ylab=names(iris)[4], 
+     bg=c("red","blue","green")[as.numeric(factor(iris$Species))], main="Dados sobre as plantas Iris com os centros das classes")
+points(iris.p[,1], iris.p[,2], pch=21, cex=2, bg=c("red", "blue", "green"))
+````
+
+Combinando vários modelos:
+
+````{r}
+forestIris1 <- randomForest(Species~ Petal.Width + Petal.Length, data=iris, prox=TRUE, ntree=50)
+forestIris2 <- randomForest(Species~ Petal.Width + Petal.Length, data=iris, prox=TRUE, ntree=50)
+forestIris3 <- randomForest(Species~ Petal.Width + Petal.Length, data=iris, prox=TRUE, ntree=50)
+forestIris1
+forestIris2
+forestIris3
+model <- combine(forestIris1, forestIris2, forestIris3)
+model
+````
+
+Predizer as classes para novos objetos:
+
+````{r}
+newdata <- data.frame(Sepal.Length<- rnorm(1000,mean(iris$Sepal.Length),
+                                           sd(iris$Sepal.Length)),
+                      Sepal.Width <- rnorm(1000,mean(iris$Sepal.Width),
+                                           sd(iris$Sepal.Width)),
+                      Petal.Width <- rnorm(1000,mean(iris$Petal.Width),
+                                           sd(iris$Petal.Width)),
+                      Petal.Length <- rnorm(1000,mean(iris$Petal.Length),
+                                            sd(iris$Petal.Length)))
+
+pred <- predict(forestIris,newdata)
+````
+
+Matriz de confusão para o novo modelo:
+
+````{r}
+table(predict(forestIris),iris$Species)
+prop.table(table(predict(forestIris),iris$Species))
+````
+
+Mostrando visualmente que o _random forest_ é capaz de separar conjunto de dados que não são separáveis linearmente:
+
+````{r}
+plot(newdata[,4], newdata[,3], pch=21, xlab="Petal.Length",ylab="Petal.Width",
+     bg=c("red", "blue", "green")[as.numeric(pred)],main="Novos dados")
+````
+
