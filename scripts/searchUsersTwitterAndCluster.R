@@ -7,22 +7,31 @@ userFollowers <- user$getFollowers()
 userNeighbors <- union(userFollowers, userFollowing)
 userNeighbors.df = twListToDF(userNeighbors)
 
-# plotando a sua lista de vizinhos utilizando os atributos
-# quantidade de seguidores e quantidade de amigos 
-# (o que é exatamente amigos neste contexto?)
-
-plot(userNeighbors.df$followersCount, userNeighbors.df$friendsCount)
-
-# o resultado deste plot nao eh tao legivel pois a maioria
-# dos pontos fica proximo do eixo (0,0)
+par(mfrow=c(2,2))
+hist(userNeighbors.df$statusesCount)
+hist(userNeighbors.df$followersCount)
+hist(userNeighbors.df$friendsCount)
+hist(userNeighbors.df$favoritesCount)
+par(mfrow=c(1,1))
 
 userNeighbors.df[userNeighbors.df=="0"]<-1
+
+userNeighbors.df$logStatusesCount <- log(userNeighbors.df$statusesCount)
 userNeighbors.df$logFollowersCount <-log(userNeighbors.df$followersCount)
-# o nome de friends para following eh muito estranho. Por isso estou
-# mudando.
 userNeighbors.df$logFollowingCount <-log(userNeighbors.df$friendsCount)
+userNeighbors.df$logFavoritesCount <-log(userNeighbors.df$favoritesCount)
+
+par(mfrow=c(2,2))
+hist(userNeighbors.df$logStatusesCount)
+hist(userNeighbors.df$logFollowersCount)
+hist(userNeighbors.df$logFollowingCount)
+hist(userNeighbors.df$logFavoritesCount)
+par(mfrow=c(1,1))
+
+
 kObject.log <- data.frame(userNeighbors.df$logFollowingCount,
-                          userNeighbors.df$logFollowersCount)
+                          userNeighbors.df$logFollowersCount,
+                          userNeighbors.df$logStatusesCount)
 
 ###elbow
 mydata <- kObject.log
@@ -35,12 +44,13 @@ plot(1:15, wss, type="b", xlab="Number of Clusters",
 ###k-means
 
 ##Run the K Means algorithm, remember to specify centers from 'elbow plot'
-userMeans.log <- kmeans(kObject.log, centers=6, iter.max=10, nstart=100)
+userMeans.log <- kmeans(kObject.log, centers=4, iter.max=10, nstart=100)
 
 ##Add the vector of specified clusters back to the original vector as a factor
 kObject.log$cluster=factor(userMeans.log$cluster)
 userNeighbors.df$cluster <- kObject.log$cluster
 
+plot(userNeighbors.df)
 
 p2 <- nPlot(logFollowersCount ~ logFollowingCount, group = 'cluster', 
             data = userNeighbors.df, type = 'scatterChart')
