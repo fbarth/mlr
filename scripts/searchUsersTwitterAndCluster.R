@@ -50,7 +50,6 @@ userMeans.log <- kmeans(kObject.log, centers=4, iter.max=10, nstart=100)
 kObject.log$cluster=factor(userMeans.log$cluster)
 userNeighbors.df$cluster <- kObject.log$cluster
 
-plot(userNeighbors.df)
 
 p2 <- nPlot(logFollowersCount ~ logFollowingCount, group = 'cluster', 
             data = userNeighbors.df, type = 'scatterChart')
@@ -60,3 +59,8 @@ p2$chart(tooltipContent = "#! function(key, x, y, e){
          return e.point.screenName + ' Followers: ' + e.point.followersCount +' Following: ' + e.point.friendsCount
          } !#")
 p2
+
+library(rgl)
+plot3d(userNeighbors.df$logStatusesCount, userNeighbors.df$logFollowersCount, 
+       userNeighbors.df$logFollowingCount, col=userNeighbors.df$cluster, size=10)
+
