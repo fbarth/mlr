@@ -1,7 +1,7 @@
 library(twitteR)
 library(yaml)
 
-config = yaml.load_file("scripts/config.yml")
+config = yaml.load_file("scripts/twitter/config.yml")
 
 cred <- OAuthFactory$new(consumerKey=config$user$key, 
                          consumerSecret=config$user$secret, 

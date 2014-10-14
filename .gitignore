@@ -4,3 +4,4 @@
 *.yml
 .DS_Store
 README.html
+*.arff

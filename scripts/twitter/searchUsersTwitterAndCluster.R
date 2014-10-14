@@ -1,5 +1,5 @@
 require(rCharts)
-source('scripts//acessoTwitter.R')
+source('scripts/twitter/acessoTwitter.R')
 
 user <- getUser("fbarth")
 userFollowing <- user$getFriends()

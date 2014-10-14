@@ -14,7 +14,7 @@ library(RColorBrewer)
 Carga do corpus:
 
 ````{r}
-load("../data/20140424_economist_brasil.rda")
+load("../../data/20140424_economist_brasil.rda")
 myCorpus <- Corpus(VectorSource(df$text))
 inspect(myCorpus[1:3])
 ````

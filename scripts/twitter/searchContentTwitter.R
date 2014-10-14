@@ -1,4 +1,4 @@
-source('scripts//acessoTwitter.R')
+source('scripts/twitter/acessoTwitter.R')
 
 #vagasTweets <- userTimeline('vagas')
 #fbarthTweets <- userTimeline('fbarth')
