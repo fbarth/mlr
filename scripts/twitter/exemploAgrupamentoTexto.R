@@ -65,9 +65,9 @@ elbow <- function(dataset) {
 
 system.time(elbow(docs_term))
 
-# Execução do _k-means_ com 9 agrupamentos:
+# Execução do _k-means_ com 10 agrupamentos:
 
-cluster_model <- kmeans(docs_term, centers= 9, nstart= 100)
+cluster_model <- kmeans(docs_term, centers= 10, nstart= 100)
 table(cluster_model$cluster)
 cluster_model$withinss
 

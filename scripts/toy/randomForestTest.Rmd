@@ -56,6 +56,12 @@ model <- combine(forestIris1, forestIris2, forestIris3)
 model
 ````
 
+Matriz de confusão para o novo modelo:
+
+````{r}
+table(predict(model,iris),iris$Species)
+````
+
 Predizer as classes para novos objetos:
 
 ````{r}
@@ -68,14 +74,7 @@ newdata <- data.frame(Sepal.Length<- rnorm(1000,mean(iris$Sepal.Length),
                       Petal.Length <- rnorm(1000,mean(iris$Petal.Length),
                                             sd(iris$Petal.Length)))
 
-pred <- predict(forestIris,newdata)
-````
-
-Matriz de confusão para o novo modelo:
-
-````{r}
-table(predict(forestIris),iris$Species)
-prop.table(table(predict(forestIris),iris$Species))
+pred <- predict(model,newdata)
 ````
 
 Mostrando visualmente que o _random forest_ é capaz de separar conjunto de dados que não são separáveis linearmente:
