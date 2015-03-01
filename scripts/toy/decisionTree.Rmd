@@ -5,6 +5,9 @@ Este relatório exemplifica o uso dos pacotes **party** e **RWeka** em problemas
 
 As referências utilizadas para a construção deste relatório foram: [http://cran.r-project.org/web/packages/RWeka/RWeka.pdf](http://cran.r-project.org/web/packages/RWeka/RWeka.pdf), [http://cran.r-project.org/doc/contrib/Zhao_R_and_data_mining.pdf](http://cran.r-project.org/doc/contrib/Zhao_R_and_data_mining.pdf) e [http://cran.r-project.org/web/packages/party/party.pdf](http://cran.r-project.org/web/packages/party/party.pdf).
 
+Divisão do dataset em conjunto de treinamento e teste
+-----------------------------------------------------
+
 Acessando o dataset e criando os conjuntos de treinamento (70% das observações) e testes (30% das observações):
 
 ````{r}
@@ -14,6 +17,9 @@ ind <- sample(2, nrow(iris), replace=TRUE, prob=c(0.7, 0.3))
 trainData <- iris[ind==1,]
 testData <- iris[ind==2,]
 ````
+
+Criando o classificador com o algoritmo ctree
+---------------------------------------------
 
 Faz a carga da biblioteca **party** e constrói a árvore de decisão usando o _ctree_:
 
@@ -44,28 +50,8 @@ testPred <- predict(iris_ctree, newdata = testData)
 table(testPred, testData$Species)
 ````
 
-
-Fazendo _cross-validation_
-=========================================================
-
-A biblioteca _ipred_ possui funções que são específicas para a etapa de _cross-validation_.
-
-````{r, message=FALSE}
-library(ipred)
-````
-
-Executando um _10-fold cross-validation_:
-
-````{r}
-set.seed(1234)
-error <- numeric(10)
-for(i in 1:10) error[i] <- errorest(Species ~ ., data= iris, model=ctree)$error
-error
-summary(error)
-````
-
-Uso do algoritmo J48
-=========================================================
+Criando o classificador com o algoritmo J48
+-------------------------------------------
 
 Importando a biblioteca e criando o modelo:
 
@@ -88,9 +74,76 @@ print(iris_j48)
 plot(iris_j48)
 ````
 
-Validando o modelo no conjunto de treinamento:
+Testando ambos os modelos no conjunto de teste
+----------------------------------------------
+
+Resultados do modelo gerado com o algoritmo **ctree**:
+
+````{r}
+testPred <- predict(iris_ctree, newdata = testData)
+table(testPred, testData$Species)
+````
+
+Resultados do modelo gerado com o algoritmo **J48**:
 
 ````{r}
 testPred <- predict(iris_j48, newdata = testData)
 table(testPred, testData$Species)
 ````
+
+Fazendo _cross-validation_
+--------------------------
+
+A biblioteca _ipred_ possui funções que são específicas para a etapa de _cross-validation_.
+
+````{r, message=FALSE}
+library(ipred)
+````
+
+Executando um _10-fold cross-validation_ para o modelo gerado pelo ctree:
+
+````{r}
+set.seed(1234)
+errorCtree <- numeric(10)
+for(i in 1:10) errorCtree[i] <- errorest(Species ~ ., data= iris, model=ctree)$error
+errorCtree
+summary(errorCtree)
+````
+
+Executando um _10-fold cross-validation_ para o modelo gerado pelo J48:
+
+````{r}
+set.seed(1234)
+errorJ48 <- numeric(10)
+for(i in 1:10) errorJ48[i] <- errorest(Species ~ ., data= iris, model=J48)$error
+errorJ48
+summary(errorJ48)
+````
+
+Predizendo os valores das classes para um dataset sintetizado
+-------------------------------------------------------------
+
+Predizer as classes para novos objetos:
+
+````{r}
+iris_j48 <- J48(myFormula, data=iris)
+
+newdata <- data.frame(Sepal.Length<- rnorm(1000,mean(iris$Sepal.Length),
+                                           sd(iris$Sepal.Length)),
+                      Sepal.Width <- rnorm(1000,mean(iris$Sepal.Width),
+                                           sd(iris$Sepal.Width)),
+                      Petal.Width <- rnorm(1000,mean(iris$Petal.Width),
+                                           sd(iris$Petal.Width)),
+                      Petal.Length <- rnorm(1000,mean(iris$Petal.Length),
+                                            sd(iris$Petal.Length)))
+
+pred <- predict(iris_j48,newdata)
+````
+
+Mostrando visualmente que árvores de decisão não separam conjunto de dados de forma não linear:
+
+````{r}
+plot(newdata[,4], newdata[,3], pch=21, xlab="Petal.Length",ylab="Petal.Width",
+     bg=c("red", "blue", "green")[as.numeric(pred)],main="Novos dados")
+````
+
