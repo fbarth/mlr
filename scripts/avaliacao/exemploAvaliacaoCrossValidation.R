@@ -16,7 +16,8 @@ erros <- 1:k
 for(i in 1:k){
   treinamento <- subset(dataset, ids %in% list[-i])
   teste <- subset(dataset, ids %in% c(i))
-  model <- ctree(formula, dataset)
+  model <- ctree(formula, treinamento)
+  plot(model)
   erros[i] <- sum(predict(model, teste) != teste$Species) / nrow(teste)
 }
 
