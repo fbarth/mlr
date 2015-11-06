@@ -8,21 +8,14 @@ library(RColorBrewer)
 # Abrindo o corpus
 
 load("data//eleicoes.rda")
-myCorpus <- Corpus(VectorSource(df$text))
-inspect(myCorpus[1:3])
 
 # Aplicando transformações no corpus, removendo acentos e convertendo para caixa baixa:
-
-myCorpus <- tm_map(myCorpus, function(x) iconv(x,to="ASCII//TRANSLIT"))
-myCorpus <- tm_map(myCorpus, tolower)
-
-# Removendo pontuação, números e stop-words: 
-
-myCorpus <- tm_map(myCorpus, removePunctuation)
-myCorpus <- tm_map(myCorpus, removeNumbers)
-myCorpus <- tm_map(myCorpus, removeWords, stopwords('portuguese'))
-myCorpus <- tm_map(myCorpus, removeWords, c('mim', 'alguem', 'nao', 'pra'))
-inspect(myCorpus[1:3])
+text <- iconv(df$text,to="ASCII//TRANSLIT")
+text <- tolower(text)
+text <- removePunctuation(text)
+text <- removeNumbers(text)
+text <- removeWords(text, stopwords('portuguese'))
+myCorpus <- Corpus(VectorSource(text))
 
 # Construindo uma matriz de documentos versus termos:
 
@@ -46,7 +39,9 @@ findFreqTerms(myTable, lowfreq=20)
 
 
 # aplicando algoritmo de stemming para reduzir a dimensao da matriz
-myCorpus <- tm_map(myCorpus, stemDocument, language="portuguese")
+text <- stemDocument(text, language = "portuguese")
+myCorpus <- Corpus(VectorSource(text))
+
 inspect(myCorpus[1:3])
 docs_term <- DocumentTermMatrix(myCorpus)
 
@@ -65,9 +60,9 @@ elbow <- function(dataset) {
 
 system.time(elbow(docs_term))
 
-# Execução do _k-means_ com 10 agrupamentos:
+# Execução do _k-means_ com 8 agrupamentos:
 
-cluster_model <- kmeans(docs_term, centers= 10, nstart= 100)
+cluster_model <- kmeans(docs_term, centers= 8, nstart= 100)
 table(cluster_model$cluster)
 cluster_model$withinss
 
@@ -81,12 +76,8 @@ df[cluster_model$cluster == 5, c('text')]
 #Apresentando os resultados
 #--------------------------
 
-my_wordcloud <- function(myCorpus){
-  myCorpus <- tm_map(myCorpus, function(x) iconv(x, to = "ASCII//TRANSLIT"))
-  myCorpus <- tm_map(myCorpus, tolower)
-  myCorpus <- tm_map(myCorpus, removePunctuation)
-  myCorpus <- tm_map(myCorpus, removeNumbers)
-  myCorpus <- tm_map(myCorpus, removeWords, stopwords("portuguese"))
+my_wordcloud <- function(text){
+  myCorpus <- Corpus(VectorSource(text))
   myTable <- TermDocumentMatrix(myCorpus)
   m <- as.matrix(myTable)
   v <- sort(rowSums(m),decreasing=TRUE)
@@ -96,7 +87,18 @@ my_wordcloud <- function(myCorpus){
   wordcloud(d$word,d$freq, scale=c(6,1), min.freq=5,max.words=100, random.order=FALSE, colors=pal)
 }
 
+png("results/cluster1.png", height = 1000, width = 1000)
 my_wordcloud(Corpus(VectorSource(df[cluster_model$cluster == 1, c('text')])))
+dev.off()
+
+png("results/cluster2.png", height = 1000, width = 1000)
 my_wordcloud(Corpus(VectorSource(df[cluster_model$cluster == 3, c('text')])))
+dev.off()
+
+png("results/cluster3.png", height = 1000, width = 1000)
 my_wordcloud(Corpus(VectorSource(df[cluster_model$cluster == 4, c('text')])))
+dev.off()
+
+png("results/cluster4.png", height = 1000, width = 1000)
 my_wordcloud(Corpus(VectorSource(df[cluster_model$cluster == 5, c('text')])))
+dev.off()
