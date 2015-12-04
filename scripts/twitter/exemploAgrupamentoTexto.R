@@ -69,9 +69,11 @@ cluster_model$withinss
 # Visualização dos agrupamentos:
 
 df[cluster_model$cluster == 1, c('text')]
+df[cluster_model$cluster == 2, c('text')]
 df[cluster_model$cluster == 3, c('text')]
-df[cluster_model$cluster == 4, c('text')]
 df[cluster_model$cluster == 5, c('text')]
+df[cluster_model$cluster == 6, c('text')]
+df[cluster_model$cluster == 8, c('text')]
 
 #Apresentando os resultados
 #--------------------------

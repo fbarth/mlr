@@ -1,0 +1,172 @@
+text,classes
+"Qual é a minha nota da prova?",nota
+"Qual é a minha nota?",nota
+"Qual é a nota do meu trabalho?",nota
+"Qual é a minha nota de Sistemas Inteligentes?",nota
+"Como fui na prova?",nota
+"Como fui no trabalho?",nota
+"Qual é a minha nota do EP?",nota
+"Qual é a minha nota do EP de Estrutura de Dados?",nota
+"Qual é a nota da prova de Sistemas Inteligentes?",nota
+"Qual é a minha nota da prova de Sistemas Inteligentes?",nota
+"Qual é a minha nota da prova de Estrutura de Dados?",nota
+"Qual é a nota da minha prova de Análise Preditiva?",nota
+"Professor tem a minha nota?",nota
+"Tem a nota da minha prova?",nota
+"Qual é a minha nota da prova de IA?",nota
+"Qual é a minha nota da prova de SI?",nota
+"Qual é a minha média?",nota
+"Que nota eu tirei?",nota
+"Qual é a minha média em Análise Preditiva?",nota
+"Que nota eu tirei em Análise Preditiva?",nota
+"Qual é a minha média em Sistemas Inteligentes?",nota
+"Que nota eu tirei em Sistemas Inteligentes?",nota
+"Qual é a minha média em Estrutura de Dados?",nota
+"Que nota eu tirei em estrutura de dados?",nota
+"E a minha nota?",nota
+"O que vai cair na prova?",conteudoAval
+"O que vai cair na prova de Estrutura de Dados?",conteudoAval
+"Como vai ser a prova?",conteudoAval
+"O que vai cair na prova de Sistemas Inteligentes?",conteudoAval
+"O que vai cair na prova de Inteligência Artificial?",conteudoAval
+"O que vai cair na prova de Estrutura de Dados?",conteudoAval
+"Como vai ser a prova de Sistemas Inteligentes?",conteudoAval
+"Como vai ser a prova de Estrutura de Dados?",conteudoAval
+"A prova vai ser parecida com a outra?",conteudoAval
+"Como vai ser a prova de Análise Preditiva?",conteudoAval
+"A prova vai ser parecida com o teste?",conteudoAval
+"A prova vai ser similar a outra?",conteudoAval
+"Como será a prova de Sistemas Inteligentes?",conteudoAval
+"Como será a prova de Estrutura de Dados?",conteudoAval
+"Como será a prova de Análise Preditiva?",conteudoAval
+"O que vai cair na prova de IA?",conteudoAval
+"O que vai cair na prova de SI?",conteudoAval
+"Qual é o conteúdo da prova?",conteudoAval
+"Qual será o conteúdo da prova?",conteudoAval
+"Qual é o conteúdo da prova de IA?",conteudoAval
+"Qual é o conteúdo da prova de Estrutura de Dados?",conteudoAval
+"Qual será o conteúdo da prova de Análise Preditiva?",conteudoAval
+"Qual é o conteúdo da prova de Análise Preditiva?",conteudoAval
+"Como será o projeto da disciplina de Inteligência Artificial?",material
+"Como será o projeto da disciplina de Sistemas Inteligentes?",material
+"Onde está o material da disciplina de IA?",material
+"Onde está o material da disciplina de Sistemas Inteligentes?",material
+"Onde eu encontro o material da disciplina de Sistemas Inteligentes?",material
+"Onde eu encontro os slides da disciplina?",material
+"Onde eu encontro os slides da matéria?",material
+"Onde está os slides da disciplina?",material
+"Onde está os slides da matéria?",material
+"Onde estão os slides da disciplina?",material
+"Onde estão os slides de Estrutura de Dados?",material
+"Onde estão os slides de Inteligência Artificial?",material
+"Onde estão os slides da disciplina de Análise Preditiva?",material
+"Onde estão os slides sobre Análise Preditiva?",material
+"Onde está o material de IA?",material
+"Onde está o material de Estrutura de Dados?",material
+"Onde está o material de Análise Preditiva?",material
+"Onde está o material da disciplina?",material
+"Onde está o conteúdo da disciplina?",material
+"Onde eu encontro o material da disciplina de Estrutura de Dados?",material
+"Onde eu encontro o material da disciplina de Análise Preditiva?",material
+"Qual é o material da disciplina?",material
+"Qual é o material da aula?",material
+"Quando vai ser a prova?",agenda
+"Quando vai ser a apresentação do projeto?",agenda
+"Quando vai ser a prova de IA?",agenda
+"Quando vai ser a prova de Estrutura de Dados?",agenda
+"Quando vai ser a prova de Sistemas Inteligentes?",agenda
+"Quando devemos entregar o projeto?",agenda
+"Quando vai ser a apresentação do projeto da disciplina?",agenda
+"Teremos aula na próxima semana?",agenda
+"Quando começam as aulas?",agenda
+"Quando terminam as aulas?",agenda
+"Quando vai ser a prova de Análise Preditiva?",agenda
+"Quando serão as apresentações de projeto?",agenda
+"Quando é a prova de Análise Preditiva?",agenda
+"Quando é a data de entrega do exercício programa?",agenda
+"Qual é a data de entrega do exercício programa?",agenda
+"Qual é a data de entrega do primeiro exercício programa?",agenda
+"Tem aula hoje?",agenda
+"Tem prova hoje?",agenda
+"Vai ter aula amanhã?",agenda
+"Teve aula ontem?",agenda
+"Teve prova ontem?",agenda
+"Teve aula ou prova nesta semana?",agenda
+"Teve aula nesta semana?",agenda
+"Teve prova nesta semana?",agenda
+"Qual é a data de entrega do EP?",agenda
+"Qual é a data de entrega do exercício programa da disciplina de Sistemas Inteligentes?",agenda
+"Quando é a entrega do primeiro exercício programa da disciplina de Sistemas Inteligentes?",agenda
+"Perdi a prova, posso fazer a sub?",regra
+"Quai são os critérios de avaliação?",regra
+"Quantas faltas eu posso ter?",regra
+"Qual é a média para passar?",regra
+"Qual é a média para passar na disciplina?",regra
+"Perdi a prova de estrutura de dados, posso fazer a sub?",regra
+"Perdi a prova de inteligência artificial, posso fazer a sub?",regra
+"Como é calculado a média?",regra
+"Como é calculado a média final?",regra
+"Como é calculado a média da disciplina?",regra
+"Como é calculado a média da disciplina de Sistemas Inteligentes?",regra
+"Quantas faltas eu posso ter durante um semestre?",regra
+"Perdi a prova de IA, posso fazer a sub?",regra
+"Não consegui entregar o trabalho no prazo, posso entregar depois?",regra
+"É possível extender o prazo de entrega dos trabalho?",regra
+"Qual é a nota mínima para passar na disciplina?",regra
+"Qual é a nota mínima para ser aprovado na disciplina?",regra
+"Estava doente no dia da prova, posso fazer em outro dia?",regra
+"Posso fazer a prova em outro dia se eu faltar?",regra
+"Quanto vale a nota dos trabalhos na média final?",regra
+"Quantos dias eu posso faltar?",regra
+"Quantas faltas eu posso ter?",regra
+"Quantas aulas eu posso faltar?",regra
+"Quem pode fazer sub?",regra
+"Quem direito a fazer a prova substitutiva?",regra
+"Perdi a prova, posso fazer a prova substitutiva?",regra
+"Quem pode fazer a prova substitutiva?",regra
+"Qual é a fórmula para calcular a média final?",regra
+"Ele é bonito?",outContext
+"Ele tem namorada?",outContext
+"Ele trabalha ou só dá aula?",outContext
+"Ele é bicha?",outContext
+"Quem vai ganhar o jogo?",outContext
+"Hoje vai fazer sol?",outContext
+"Quem vai ganhar a eleição?",outContext
+"Vai chover hoje?",outContext
+"Qual é a temperatura lá fora?",outContext
+"Qual é o telefone do professor?",outContext
+"Onde fica a faculdade?",outContext
+"blablabla blablablablabla ",outContext
+"Teste testes teste teste",outContext
+"Oi seu boi",outContext
+"Olha só que coisa",outContext
+"Brasil é campeão!",outContext
+"Quem vai ganhar o jogo?",outContext
+"Qual é o horário do vôo?",outContext
+"A BandTec é uma boa faculdade?",outContext
+"Onde fica o shopping?",outContext
+"Qual é a capital do Brasil?",outContext
+"Onde fica São Paulo?",outContext
+"Qual é a diferença entre amarelo e vermelho?",outContext
+"Está chovendo?",outContext
+"Amanhã vai fazer sol?",outContext
+"Que carro eu devo comprar?",outContext
+"Ela é bonita?",outContext
+"Qual é a aluna mais gostosa da classe?",outContext
+"Quem é o mais esperto?",outContext
+"Quais são os professores da faculdade?",outContext
+"Ele tem namorada? ",outContext
+"Ele é bonito?",outContext
+"Vai chover hoje?",outContext
+"Vai ter prova hoje?",agenda
+"Quando começa o semestre?",agenda
+"Onde eu encontro o material da disciplina?",material
+"Como é feito o cálculo da média?",regra
+"O que vai cair na prova?",conteudoAval
+"Qual foi a minha média na disciplina de estrutura de dados?",nota
+"Quais são as normas?",regra
+"Quando será o próximo happy hour?",outContext
+"onde estão as minhas notas?",nota
+"onde eu encontro as minhas notas?",nota
+"vc sabe onde encontro notas?",nota
+"vc sabe onde encontro os material?",material
