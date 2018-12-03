@@ -1,8 +1,13 @@
 user:
  key : inserir a sua consumerKey aqui
  secret : inserir a sua consumerSecret aqui
+ accessToken : inserir o access token da app
+ accessTokenSecret : inserir o access token secret da app
 
 Voce terah acesso as chaves depois de 
 criar uma applicacao em https://apps.twitter.com/
 Apague este paragrafo para que o arquivo
 de configuracao funcione.
+
+post que explica como criar uma app: https://medium.com/@GalarnykMichael/accessing-data-from-twitter-api-using-r-part1-b387a1c7d3e
+

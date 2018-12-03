@@ -8,6 +8,7 @@ library(RColorBrewer)
 # Abrindo o corpus
 
 load("data//eleicoes.rda")
+#load("data//bolsonaro.Rda")
 
 # Aplicando transformações no corpus, removendo acentos e convertendo para caixa baixa:
 text <- iconv(df$text,to="ASCII//TRANSLIT")
@@ -44,6 +45,7 @@ myCorpus <- Corpus(VectorSource(text))
 
 inspect(myCorpus[1:3])
 docs_term <- DocumentTermMatrix(myCorpus)
+inspect(docs_term[1:10,1:10])
 
 # Implementação da função _elbow_ utilizada na 
 # identificação do melhor número de agrupamentos.
@@ -60,9 +62,9 @@ elbow <- function(dataset) {
 
 system.time(elbow(docs_term))
 
-# Execução do _k-means_ com 8 agrupamentos:
+# Execução do _k-means_ com 7 agrupamentos:
 
-cluster_model <- kmeans(docs_term, centers= 8, nstart= 100)
+cluster_model <- kmeans(docs_term, centers= 7, nstart= 100)
 table(cluster_model$cluster)
 cluster_model$withinss
 
@@ -71,6 +73,7 @@ cluster_model$withinss
 df[cluster_model$cluster == 1, c('text')]
 df[cluster_model$cluster == 2, c('text')]
 df[cluster_model$cluster == 3, c('text')]
+df[cluster_model$cluster == 4, c('text')]
 df[cluster_model$cluster == 5, c('text')]
 df[cluster_model$cluster == 6, c('text')]
 df[cluster_model$cluster == 8, c('text')]
